@@ -38,8 +38,8 @@ async function fetchAIResponse(userText) {
                 "Authorization": `Bearer ${API_KEY}`
             },
             body: JSON.stringify({
-                // YAHAN MODEL KA NAAM UPDATE KIYA GAYA HAI
-                model: "llama3-8b-8192",
+                // Naya active model name update kiya gaya hai
+                model: "openai/gpt-oss-20b",
                 messages: [
                     { role: "system", content: "You are an advanced, professional AI system for The New Tips. Provide direct, highly accurate, and concise answers in Hinglish or English." },
                     { role: "user", content: userText }
