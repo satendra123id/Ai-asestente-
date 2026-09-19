@@ -10,7 +10,6 @@ const userInput = document.getElementById("user-input");
 const sendBtn = document.getElementById("send-btn");
 const micBtn = document.getElementById("mic-btn");
 
-// UI mein message add karne ka function
 function appendMessage(text, sender, isError = false) {
     const msgDiv = document.createElement("div");
     msgDiv.classList.add("msg", sender);
@@ -21,7 +20,6 @@ function appendMessage(text, sender, isError = false) {
     return msgDiv;
 }
 
-// Hacker Typewriter Effect
 async function typeWriterEffect(element, text) {
     element.innerHTML = "> ";
     for (let i = 0; i < text.length; i++) {
@@ -31,7 +29,6 @@ async function typeWriterEffect(element, text) {
     }
 }
 
-// Groq API Call
 async function fetchAIResponse(userText) {
     try {
         const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
@@ -41,7 +38,8 @@ async function fetchAIResponse(userText) {
                 "Authorization": `Bearer ${API_KEY}`
             },
             body: JSON.stringify({
-                model: "llama-3.1-8b-instant",
+                // YAHAN MODEL KA NAAM UPDATE KIYA GAYA HAI
+                model: "llama3-8b-8192",
                 messages: [
                     { role: "system", content: "You are an advanced, professional AI system for The New Tips. Provide direct, highly accurate, and concise answers in Hinglish or English." },
                     { role: "user", content: userText }
@@ -61,7 +59,6 @@ async function fetchAIResponse(userText) {
     }
 }
 
-// Message Send Handler
 async function handleSend() {
     const text = userInput.value.trim();
     if (!text) return;
@@ -81,7 +78,6 @@ async function handleSend() {
     }
 }
 
-// Voice Recognition
 function setupVoice() {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
@@ -90,7 +86,6 @@ function setupVoice() {
     }
 
     const rec = new SpeechRecognition();
-    // Aap chaho toh 'hi-IN' ko 'en-IN' kar sakte ho agar English me jyada command dena hai
     rec.lang = "hi-IN";
 
     rec.onstart = () => {
@@ -112,7 +107,6 @@ function setupVoice() {
             loadingMsg.innerHTML = "";
             await typeWriterEffect(loadingMsg, aiResponse);
             
-            // TTS (Text to Speech)
             const utterance = new SpeechSynthesisUtterance(aiResponse);
             utterance.lang = "hi-IN";
             speechSynthesis.speak(utterance);
@@ -130,7 +124,6 @@ function setupVoice() {
     rec.start();
 }
 
-// Event Listeners
 sendBtn.addEventListener("click", handleSend);
 userInput.addEventListener("keypress", (e) => {
     if (e.key === "Enter") handleSend();
