@@ -1,8 +1,8 @@
 // YAHAN APNI GROQ API KEY DAALEIN
-const API_KEY = "hsb_bacf5b9daca8efbf6c5ed272a1145b33ccb5159a33635181d161669c62"; 
+const API_KEY = "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"; 
 
 const chatBox = document.getElementById("chat-box");
-const userInput = document.getElementById("user-input");
+const userInpuawait new Promise(resolve => setTimeout(resolve, 15)); // Typing speedt = document.getElementById("user-input");
 const sendBtn = document.getElementById("send-btn");
 const micBtn = document.getElementById("mic-btn");
 
